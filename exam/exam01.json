@@ -1,5 +1,6 @@
 var exam = {
-	title:'',
+	title:'模拟考一',
+	time: 240,
 	items:[
 	{
 	   sn:1,
@@ -22,7 +23,7 @@ var exam = {
 		'C':'C、 优先',
 		'D':'D、 强制或硬逻辑关系'
 	   },
-		key:'',
+		key:'D',
         type:''
 	},	
 	{
@@ -2283,7 +2284,7 @@ var exam = {
 	},	
 	{
 	   sn:200,
-	   subject:'',
+	   subject:'采购审计指',
 	   answers:{
 		'A':'',
 		'B':'',

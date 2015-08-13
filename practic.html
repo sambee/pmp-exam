@@ -6,10 +6,10 @@
     <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Bootstrap - 简洁、直观、强悍、移动设备优先的前端开发框架，让web开发更迅速、简单。">
-<meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
-<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-<meta name="author" content="译者：王赛 <wangsai@bootcss.com>">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="">
+<meta name="author" content="">
 
 <title>
   
@@ -28,7 +28,8 @@
 <!-- Documentation extras -->
 
 <link href="assets/css/docs.min.css" rel="stylesheet">
-
+<link href="bootstrap/slider/css/bootstrap-slider.css" rel="stylesheet">
+<script type='text/javascript' src="bootstrap/slider/dependencies/js/modernizr.js"></script>
 <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -44,43 +45,107 @@
 <script>
   var _hmt = _hmt || [];
 </script>
+
+<style>
+    #exam_progressbarSlider .slider-selection {
+        background: #BABABA;
+    }
+</style>
   </head>
-  <body>
+
+
+<body>
  
  <div class="container">
 
-<h2>练习</h2>
 
+     <nav class="navbar navbar-default">
+         <div class="container-fluid">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                     <span class="sr-only">Toggle navigation</span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
+                 <a class="navbar-brand" href="#">练习</a>
+             </div>
+             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                 <ul class="nav navbar-nav">
+                     <li class="active"><a href="#" id="btn_back">返回 <span class="sr-only">(current)</span></a></li>
+                 </ul>
 
-<p class="bg-success">成绩</p>
+                 <form class="navbar-form navbar-left" role="search">
+                     <div class="form-group">
+                         <input type="text" class="form-control" placeholder="Search">
+                     </div>
+                     <button  type="submit" class="btn btn-default"  id="btn_query">查询</button>
+                 </form>
+             </div>
+         </div>
+     </nav>
 
-<h3>标题</h3>
-<h4>题目内容</h4>
+     <ul class="list-group">
+         <li class="list-group-item list-group-item-info">
+             <span class="label label-primary">正确</span>
+             <a href="#"><span class="badge" id="exam_correct">0</span></a>
 
+             <span class="label label-primary">正确率</span>
+             <a href="#"><span class="badge" id="exam_correct_percent">0%</span></a>
+
+             <span class="label label-primary">错误</span>
+             <a href="#"><span class="badge" id="exam_wrong">0</span></a>
+
+             <span class="label label-primary">当前</span>
+             <a href="#"><input id="exam_index" value="0" style="width:30px"> </a>
+
+             <span class="label label-primary">数量</span>
+             <a href="#"><span class="badge" id="exam_count">0</span></a>
+
+             <button href="#" class="btn btn-success" id="btn_load">加载</button>
+
+         </li>
+		 <li class="list-group-item list-group-item-success" id="exam_all_answers"></li>
+     </ul>
+
+     <input id="exam_progressbar" data-slider-id='exam_progressbarSlider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+
+     <h3 id="exam_title">标题</h3>
+<h4 id="exam_content">题目内容</h4>
+<form id="exam_amswer_form">
 <div class="checkbox">
     <label>
-      <input type="checkbox"> A.
+      <input type="checkbox" name="exam_answer" value="A"> <span id="exam_key_a">A.</span>
     </label>
 </div>
 <div class="checkbox">
     <label>
-      <input type="checkbox"> B.
+      <input type="checkbox" name="exam_answer" value="B">  <span id="exam_key_b">B.</span>
     </label>
 </div>
 <div class="checkbox">
     <label>
-      <input type="checkbox"> C.
+      <input type="checkbox" name="exam_answer"  value="C"><span id="exam_key_c">C.</span>
     </label>
 </div>
 <div class="checkbox">
     <label>
-      <input type="checkbox"> D.
+      <input type="checkbox" name="exam_answer"  value="D"> <span id="exam_key_d">D.</span>
     </label>
 </div>
+</form>
+     <nav>
+         <ul class="pager">
+             <li><button class="btn btn-success" id="btn_perv" >上一题</button></li>
+             <li><button class="btn btn-danger"  id="btn_next">下一题</button></li>
+             <li> <button type="button" class="btn btn-primary bs-docs-popover" data-toggle="popover" title="Popover title" data-content="">提  示</button></li>
 
-<button class="btn btn-success" >上一题</button>
-<button class="btn btn-danger" >下一题</button>
-<button type="button" class="btn btn-success bs-docs-popover" data-toggle="popover" title="Popover title" data-content="">提示</button>
+
+         </ul>
+     </nav>
+
+
+
 
 
 </div>
@@ -89,21 +154,14 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="jquery/1.11.3/jquery.min.js"></script>
-
-
-  <script src="bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-
-  <script src="assets/js/docs.min.js"></script>
-
-
-
+<script src="bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="assets/js/docs.min.js"></script>
+<script type='text/javascript' src="bootstrap/slider/js/bootstrap-slider.min.js"></script>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
-
+ <script src="app.js" ></script>
 
 <!-- Analytics
 ================================================== -->

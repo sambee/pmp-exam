@@ -1,7 +1,8 @@
 
 
 var exam = {
-	title:'',
+	title:'模拟考三',
+	time: 240,
 	items:[
 	{
 	   sn:1,

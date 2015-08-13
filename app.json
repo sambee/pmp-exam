@@ -1,0 +1,18 @@
+Exams.from =[
+{
+url:'exam/exam01.json'
+},
+{
+url:'exam/exam02.json'
+},
+{
+url:'exam/exam03.json'
+},
+{
+url:'exam/exam04.json'
+},
+{
+url:'exam/pmp_sync.json'
+}
+
+]
