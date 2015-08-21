@@ -43,6 +43,7 @@ Exams.on('ready', function(exams){
                 checkAnswer(i, exam.items[i], exam_done[i]);
             }
             setAnswerKey(exam_done[index]);
+            setExamProgress(index+1);
             render();
         }
 
@@ -54,7 +55,7 @@ Exams.on('ready', function(exams){
             save();
         }
         if(index--<0)index =0;
-
+        setExamProgress(index+1);
         render();
     }
 
@@ -65,6 +66,7 @@ Exams.on('ready', function(exams){
             save();
         }
         if(index++>exam.items.length)index =exam.items.length;
+        setExamProgress(index+1);
         render();
     }
     function render(){
@@ -74,12 +76,15 @@ Exams.on('ready', function(exams){
             setAnswerKey(exam_done[index])
         }
 
-        $('#exam_content').text(exam.items[index].sn + '. ' + exam.items[index].subject);
+		
+        $('#exam_content').html(exam.items[index].sn + '. ' + exam.items[index].subject);
         $('#exam_key_a').text(exam.items[index].answers['A']);
         $('#exam_key_b').text(exam.items[index].answers['B']);
         $('#exam_key_c').text(exam.items[index].answers['C']);
         $('#exam_key_d').text(exam.items[index].answers['D']);
         $('#exam_correct').text(exam_correct);
+        var i = !exam_done||exam_done.length ==0 ? 1 : exam_done.length;
+        $('#exam_correct_percent').text(parseInt(exam_correct*100/i)+'%');
         $('#exam_wrong').text(exam_done.length-exam_correct);
         $('#exam_index').val(exam_done.length+1);
         $('#exam_count').text(exam_count);
@@ -117,22 +122,8 @@ Exams.on('ready', function(exams){
 
 //https://github.com/juanmendez/bootstrap-slider
 //progressbar 
-	function setExamProgress(max, min, now){
-
-        $('#exam_progressbar').slider({
-            formatter: function(value) {
-                return '当前: ' + value;
-            },
-            id: "exam_progressbarSlider",
-            min: min,
-            max: max,
-            value: now
-        });
-        $('#exam_progressbar').on('change', function(e){
-            index = e.value.newValue;
-            render();
-        })
-        $('.slider-horizontal').css('width', '100%')
+	function setExamProgress(now){
+        $('#exam_progressbar').slider('setValue', now)
 
 	}
 
@@ -158,6 +149,24 @@ Exams.on('ready', function(exams){
     var exam_correct =0;
     var KEYS = 'ABCD';
     $('#exam_title').text(title);
+
+
+    $('#exam_progressbar').slider({
+        formatter: function(value) {
+            return '当前: ' + value;
+        },
+        id: "exam_progressbarSlider",
+        min: 0,
+        max: exam_count,
+        value: 0
+    });
+    $('#exam_progressbar').on('change', function(e){
+        index = e.value.newValue;
+        render();
+    });
+    $('.slider-horizontal').css('width', '100%');
+
+
 	setExamProgress(exam_count, 0, 0);
     next();
 
